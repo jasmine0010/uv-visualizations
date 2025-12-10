@@ -3,7 +3,7 @@
 
 let x = 0;
 let img;
-
+let audio;
 
 function preload()
 {
@@ -16,6 +16,10 @@ function setup() {
     createCanvas(1000, 600);
 
     img.resize(width, height);
+    
+    audio = createAudio('soundEffect.mp3');
+    audio.showControls();
+    
 }
 
 function draw() {
@@ -30,7 +34,10 @@ function draw() {
 
     ellipse(x, 200, 100, 50);
     x++;
- 
+    
+    //ellipse(200, 200, 50, 50);
 }
+
+
 
 
