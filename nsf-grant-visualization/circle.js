@@ -1,5 +1,7 @@
 class Circle {
-    constructor(grant_id, status, termination_date, project_title, abstract, estimated_remaining, min_remaining, max_remaining, division, directorate) {
+    constructor(col, grant_id, status, termination_date, project_title, abstract, estimated_remaining, min_remaining, max_remaining, division, directorate) {
+        this.col = col;
+
         this.id = grant_id;
         this.status = status;
         this.term_date = termination_date;
@@ -11,7 +13,7 @@ class Circle {
         this.div = division;
         this.dir = directorate;
 
-        this.pos = createVector(random(width), random(height));
+        this.pos = createVector(random(width * 0.15, width * 0.85), random(height * 0.15, height * 0.85));
         this.vel = createVector(0, 0);
         this.acc = createVector(0, 0);
 
@@ -29,7 +31,16 @@ class Circle {
         this.acc.mult(0);
     }
 
-    display() {
+    display(isActive) {
+        if (isActive) {
+            fill(227, 153, 240);
+        } else {
+            fill(this.col[0], this.col[1], this.col[2]);
+        }
         ellipse(this.pos.x, this.pos.y, this.r*2, this.r*2);
+    }
+    
+    hasKeyword(keyword) {
+        return this.abstract.toLowerCase().includes(keyword);
     }
 }

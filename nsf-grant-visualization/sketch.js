@@ -1,6 +1,19 @@
-let search_term = "";
 let grants;
 let circles = [];
+let buttons = [];
+let curKeyword = "";
+
+let directorates = {
+    "EDU": {label: "STEM Education", color: [89, 143, 255]},
+    "MPS": {label: "Mathematical and Physical Sciences", color: [255, 90, 150]},
+    "ENG": {label: "Engineering", color: [255, 220, 85]},
+    "SBE": {label: "Social, Behavioral and Economic Sciences", color: [140, 75, 210]},
+    "BIO": {label: "Biological Sciences", color: [171, 214, 255]},
+    "GEO": {label: "Geosciences", color: [30, 60, 160]},
+    "TIP": {label: "Technology, Innovation and Partnerships", color: [255, 105, 50]},
+    "OD": {label: "Office of the Director", color: [180, 95, 180]},
+    "CISE": {label: "Computer and Information Science and Engineering", color: [255, 180, 50]}
+};
 
 function preload() {
     grants = loadJSON('nsf_terminations.json');
@@ -8,17 +21,18 @@ function preload() {
 
 function setup() {
     createCanvas(1000, 600);
-
     rectMode(CENTER);
-    textAlign(CENTER);
     
-    const grantsArray = Object.values(grants);
-    const estimated_remaining = grantsArray.map(g => g.estimated_remaining);
+    const grantsArr = Object.values(grants);
+    const estimated_remaining = grantsArr.map(g => g.estimated_remaining);
     const min_remaining = min(estimated_remaining);
     const max_remaining = max(estimated_remaining);
 
-    for (let g of grantsArray) {
+    for (let g of grantsArr) {
+        if (g.reinstated) continue;
+        
         circles.push(new Circle(
+            directorates[g.dir] ? directorates[g.dir].color : [255, 255, 255],
             g.grant_id,
             g.status,
             g.termination_date,
@@ -31,26 +45,48 @@ function setup() {
             g.directorate
         ))
     }
+
+    buttons = [
+        new Button("Gender", "gender", createVector(width * 0.8, height * 0.8)),
+        new Button("STEM", "stem", createVector(width * 0.8, height * 0.85))
+    ];
 }
 
 function draw() {
     background(0);
-    fill(255);
+    
     applyRepulsiveForce();
+
+    let activeKeywords = buttons.filter(b => b.active).map(b => b.keyword);
+
+    let total = 0;
+    let count = 0;
     for (let c of circles) {
+        let active = activeKeywords.some(k => c.hasKeyword(k) === true);
+        c.display(active);
         c.update();
-        if (search_term != "") {
-            if (c.abstract.includes(search_term)) {
-                c.display();
-            }
-        } else {
-            c.display();
+        
+        if (active) {
+            total += c.remaining;
+            count++;
         }
     }
     
-    stroke(0);
-    rect(width*0.9, height*0.9, 50, 50);
-    text("button", width*0.9, height*0.9);
+    drawOverview(total, count);
+    drawButtons();
+}
+
+function drawOverview(total, count) {
+    fill(255);
+    textSize(18);
+    text(`Matched Grants: ${count}\nEstimated Funds Remaining: ${total}`, width/2, 30);
+}
+
+function drawButtons() {
+    for (let b of buttons) {
+        b.display();
+        b.update();
+    }
 }
 
 function applyRepulsiveForce() {
@@ -64,19 +100,16 @@ function applyRepulsiveForce() {
             if (a.r + b.r > f.mag()) {
                 f.setMag(0.2);
                 a.applyForce(f);
-                b.applyForce(f.copy().mult(-1));
+                b.applyForce(f.mult(-1));
             }
         }
     }
 }
 
 function mousePressed() {
-    if (width*0.9 - 25 < mouseX && mouseX < width*0.9 + 25 &&
-        height*0.9 - 25 < mouseY && mouseY < height*0.9 + 25) {
-        if (search_term === "gender") {
-            search_term = "";
-        } else {
-            search_term = "gender";
+    for (let b of buttons) {
+        if (b.has(mouseX, mouseY)) {
+            b.active = !b.active;
         }
     }
 }
