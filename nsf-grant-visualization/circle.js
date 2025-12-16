@@ -33,8 +33,10 @@ class Circle {
 
     display(isActive) {
         if (isActive) {
+            stroke(255);
             fill(227, 153, 240);
         } else {
+            noStroke();
             fill(this.col[0], this.col[1], this.col[2]);
         }
         ellipse(this.pos.x, this.pos.y, this.r*2, this.r*2);
