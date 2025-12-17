@@ -21,7 +21,6 @@ function preload() {
 
 function setup() {
     createCanvas(1000, 600);
-    rectMode(CENTER);
     
     const grantsArr = Object.values(grants);
     const estimated_remaining = grantsArr.map(g => g.estimated_remaining);
@@ -47,8 +46,8 @@ function setup() {
     }
 
     buttons = [
-        new Button("Gender", "gender", createVector(width * 0.8, height * 0.8)),
-        new Button("STEM", "stem", createVector(width * 0.8, height * 0.85))
+        new Button("Gender", "gender", createVector(width * 0.1, height * 0.8)),
+        new Button("STEM", "stem", createVector(width * 0.1, height * 0.85))
     ];
 }
 
@@ -57,7 +56,12 @@ function draw() {
     
     applyRepulsiveForce();
 
-    let activeKeywords = buttons.filter(b => b.active).map(b => b.keyword);
+    let activeKeywords = [];
+    for (let b of buttons) {
+        if (b.active) {
+            activeKeywords.push(b.keyword);
+        }
+    }
 
     let total = 0;
     let count = 0;
@@ -73,7 +77,7 @@ function draw() {
     }
     
     drawOverview(total, count);
-    drawButtons();
+    drawLegend();
 }
 
 function drawOverview(total, count) {
@@ -82,7 +86,16 @@ function drawOverview(total, count) {
     text(`Matched Grants: ${count}\nEstimated Funds Remaining: ${total}`, width/2, 30);
 }
 
+function drawLegend() {
+    rectMode(CORNER);
+    stroke(255);
+    fill(0);
+    rect(0, 0, width*0.25, height);
+    drawButtons();
+}
+
 function drawButtons() {
+    rectMode(CENTER);
     for (let b of buttons) {
         b.display();
         b.update();

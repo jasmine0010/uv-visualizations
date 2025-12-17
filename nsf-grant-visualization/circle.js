@@ -13,7 +13,7 @@ class Circle {
         this.div = division;
         this.dir = directorate;
 
-        this.pos = createVector(random(width * 0.15, width * 0.85), random(height * 0.15, height * 0.85));
+        this.pos = createVector(random(width * 0.35, width * 0.9), random(height * 0.15, height * 0.85));
         this.vel = createVector(0, 0);
         this.acc = createVector(0, 0);
 

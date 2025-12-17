@@ -6,11 +6,10 @@
 
 body {
     font-family:'Lucida Sans', sans-serif;
-    background-color: black;
+    background-color: white;
     color: azure;
     display: flex;
     flex-direction: column;
-    padding: 20px;
 }
 
 header {
