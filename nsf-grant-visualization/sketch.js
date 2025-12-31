@@ -53,8 +53,6 @@ function setup() {
 
 function draw() {
     background(0);
-    
-    applyRepulsiveForce();
 
     let activeKeywords = [];
     for (let b of buttons) {
@@ -67,14 +65,19 @@ function draw() {
     let count = 0;
     for (let c of circles) {
         let active = activeKeywords.some(k => c.hasKeyword(k) === true);
-        c.display(active);
-        c.update();
-        
+        c.display(active || activeKeywords.length == 0);
         if (active) {
             total += c.remaining;
             count++;
+            c.applyForceCenter();
         }
+        if (!c.onScreen()) {
+            c.bounce();
+        }
+        c.update();
     }
+    
+    applyRepulsiveForce();
     
     drawOverview(total, count);
     drawLegend();
@@ -109,11 +112,12 @@ function applyRepulsiveForce() {
             let b = circles[j];
 
             let f = p5.Vector.sub(a.pos, b.pos);
-            
-            if (a.r + b.r > f.mag()) {
-                f.setMag(0.2);
+            let overlap = a.r + b.r + 3 - f.mag();
+
+            if (overlap > 0) {
+                f.mult(overlap * 0.015);
                 a.applyForce(f);
-                b.applyForce(f.mult(-1));
+                b.applyForce(p5.Vector.mult(f, -1));
             }
         }
     }

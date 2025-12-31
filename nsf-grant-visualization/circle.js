@@ -13,7 +13,7 @@ class Circle {
         this.div = division;
         this.dir = directorate;
 
-        this.pos = createVector(random(width * 0.35, width * 0.9), random(height * 0.15, height * 0.85));
+        this.pos = createVector(random(width*0.35, width*0.9), random(height*0.15, height*0.85));
         this.vel = createVector(0, 0);
         this.acc = createVector(0, 0);
 
@@ -24,22 +24,40 @@ class Circle {
         this.acc.add(f);
     }
 
+    applyForceCenter() {
+        let targ = createVector(width/2 + random(-40, 40), height/2 + random(-40, 40));
+        let f = p5.Vector.sub(targ, this.pos);
+        f.setMag(0.05);
+        this.applyForce(f);
+    }
+
     update() {
         this.vel.add(this.acc);
         this.vel.mult(0.95);
         this.pos.add(this.vel);
         this.acc.mult(0);
+
+        constrain(this.pos.x, this.r, width-this.r);
+        constrain(this.pos.y, this.r, height-this.r);
     }
 
     display(isActive) {
+        noStroke();
         if (isActive) {
-            stroke(255);
-            fill(227, 153, 240);
+            fill(this.col[0], this.col[1], this.col[2]);
         } else {
             noStroke();
-            fill(this.col[0], this.col[1], this.col[2]);
+            fill(this.col[0], this.col[1], this.col[2], 100);
         }
         ellipse(this.pos.x, this.pos.y, this.r*2, this.r*2);
+    }
+
+    onScreen() {
+        return this.pos.x >= width*0.25 + this.r && this.pos.x <= width-this.r && this.pos.y >= this.r && this.pos.y <= height-this.r;
+    }
+
+    bounce() {
+        this.vel.mult(-1);
     }
     
     hasKeyword(keyword) {
