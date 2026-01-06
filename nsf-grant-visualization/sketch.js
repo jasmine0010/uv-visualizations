@@ -2,6 +2,7 @@ let grants;
 let circles = [];
 let buttons = [];
 let activeKeywords = [];
+let activeGrant;
 let legendRight;
 
 let directorates = {
@@ -23,7 +24,7 @@ function preload() {
 function setup() {
     createCanvas(1000, 600);
 
-    legendRight = width*0.3;
+    legendRight = width*0.32;
     
     const grantsArr = Object.values(grants);
     const estimated_remaining = grantsArr.map(g => g.estimated_remaining);
@@ -40,6 +41,7 @@ function setup() {
             g.termination_date,
             g.project_title,
             g.abstract,
+            g.org_name,
             g.estimated_remaining,
             min_remaining,
             max_remaining,
@@ -49,8 +51,13 @@ function setup() {
     }
 
     buttons = [
-        new Button("Gender", "gender", createVector(width*0.1, height*0.8)),
-        new Button("STEM", "stem", createVector(width*0.1, height*0.85))
+        new Button("STEM", "stem", createVector(width*0.02, height*0.1), color(247, 210, 87), color(232, 193, 65), color(212, 172, 42)),
+        new Button("Gender", "gender", createVector(width*0.02, height*0.15), color(171, 135, 222), color(149, 107, 209), color(126, 80, 191)),
+        new Button("Girls", "girls", createVector(width*0.02, height*0.2), color(240, 104, 62), color(227, 88, 45), color(214, 72, 28)),
+        new Button("High school", "high school", createVector(width*0.02, height*0.25), color(63, 203, 235), color(41, 182, 214), color(28, 167, 199)),
+        new Button("Underrepresented", "underrepresented", createVector(width*0.02, height*0.3), color(235, 129, 235), color(219, 99, 219), color(199, 72, 199)),
+        new Button("Black", "black", createVector(width*0.02, height*0.35), color(201, 235, 91), color(186, 222, 69), color(172, 212, 44)),
+        new Button("Latino", "latino", createVector(width*0.02, height*0.4), color(102, 92, 247), color(82, 72, 232), color(62, 52, 217))
     ];
 }
 
@@ -93,21 +100,27 @@ function drawLegend(total, count) {
     
     rectMode(CORNER);
     stroke(255);
+    strokeWeight(1);
     fill(0);
     rect(0, 0, legendRight, height);
+    line(0, height*0.45, legendRight, height*0.45);
+    line(0, height*0.56, legendRight, height*0.56);
+
+    for (let b of buttons) {
+        b.display();
+        b.update();
+    }
     
     noStroke();
     fill(255);
     textAlign(LEFT);
-    text(`Matched Grants: ${count}\nEstimated Funds Remaining: ${total}`, width*0.03, 30);
-    drawButtons();
-}
+    textSize(15);
+    text(`Matched Grants: ${count}\nEstimated Funds Remaining: ${int(total)}`, width*0.02, height*0.5);
 
-function drawButtons() {
-    rectMode(CENTER);
-    for (let b of buttons) {
-        b.display();
-        b.update();
+    if (activeGrant != null) {
+
+        text(`Project Title: ${activeGrant.project_title}`, width*0.02, height*0.59, legendRight*0.9, height*0.1);
+        text(`Organization: ${activeGrant.org_name}`, width*0.02, height*0.7, legendRight*0.9, height*0.08);
     }
 }
 
