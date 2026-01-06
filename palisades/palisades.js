@@ -45,8 +45,33 @@ function draw() {
        
     image(img, 0, 0);
     
-    text('Altadena', 1050, 650);
+    fill(0);
     textSize(25);
+    text('Altadena', 1050, 630);
+   
+    fill(0, 0, 255);
+    textSize(22);
+    text('Eloise', 965, 275);
+    
+    fill(0, 0, 255);
+    textSize(22);
+    text('Addie', 632, 455);
+    
+    fill(0, 0, 255);
+    textSize(22);
+    text('Ellie', 267, 245);
+   
+    fill(0, 0, 255);
+    textSize(22);
+    text('Cara', 165, 275);
+    
+    fill(0, 0, 255);
+    textSize(22);
+    text('Chloe', 740, 335);
+    
+    fill(0, 0, 255);
+    textSize(22);
+    text('Eleanor', 1063, 675);
    
 
    
@@ -127,7 +152,15 @@ class Marker
         }
         
         display()
-        {
+        {   
+            if(dist(this.x, this.y, mouseX, mouseY) < 20)
+                {
+                    fill(0, 255, 0);
+                }
+            else
+                {
+                    fill(255);
+                }
             ellipse(this.x, this.y, 20, 20)
         }
     }
