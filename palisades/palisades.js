@@ -44,9 +44,9 @@ function draw() {
     
        
     image(img, 0, 0);
-    text(mouseX + ' ' + mouseY, 100, 100);
     
-    
+    text('Altadena', 1050, 650);
+    textSize(25);
    
 
    
