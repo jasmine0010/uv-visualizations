@@ -63,6 +63,12 @@ function draw() {
 
 function mouseClicked()
 {
+    if (audio)
+        {
+        audio.hideControls();
+        audio = null;
+        }
+    
     for(let c of circles)
         {
             if(dist(c.x, c.y, mouseX, mouseY) < 20)
