@@ -32,7 +32,7 @@ function setup() {
     circles = [];
 
     circles.push(new Marker(745*s, 300*s, 'audio/EloiseG.mp3')) //Eloise G
-    circles.push(new Marker(500*s, 480*s, 'audio/AddieS.mp3'))//Addison S
+    circles.push(new Marker(670*s, 480*s, 'audio/AddieS.mp3'))//Addison S
     circles.push(new Marker(220*s, 270*s, 'audio/EllieL.mp3')) // Ellie L
     circles.push(new Marker(140*s, 300*s, 'audio/CaraH.mp3')) // Cara H
     circles.push(new Marker(575*s, 360*s, 'audio/ChloeS.mp3')) // chloe S
@@ -65,7 +65,7 @@ function draw() {
     
     fill(0, 0, 255);
     textSize(22);
-    text('Addie', 472*s, 455*s);
+    text('Addie', 642*s, 455*s);
     
     fill(0, 0, 255);
     textSize(22);
