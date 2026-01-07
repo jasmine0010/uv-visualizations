@@ -22,16 +22,14 @@ class Tooltip {
         fill(7, 1, 11);
         stroke(176, 155, 191);
         strokeWeight(1);
-        rect(this.x, this.y, width*0.2, height*0.23);
+        rect(this.x, this.y, width*0.21, height*0.2);
 
         fill(176, 155, 191);
         noStroke();
         textAlign(LEFT, BASELINE);
-        text('Honors Computer Science Projects', this.x + width*0.013, this.y + height*0.05);
-        text('Dr. Kessner', this.x + width*0.013, this.y + height*0.08);
-        text('Mr. Vega', this.x + width*0.013, this.y + height*0.11);
+        text('Coded by Jasmine \'28 for Honors CS Projects taught by Dr. Darren Kessner', this.x + width*0.013, this.y + height*0.03, width*0.19);
         textStyle(ITALIC);
-        text('Data provided by Grant Witness, see grant-witness.us/nsf-data.html', this.x + width*0.013, this.y + height*0.15, width*0.19);
+        text('Data provided by Grant Witness, see grant-witness.us/nsf-data.html', this.x + width*0.013, this.y + height*0.12, width*0.19);
     }
 
     checkHover() {
