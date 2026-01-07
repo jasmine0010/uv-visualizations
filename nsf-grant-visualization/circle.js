@@ -1,5 +1,5 @@
 class Circle {
-    constructor(col, grant_id, status, termination_date, project_title, abstract, org_name, estimated_remaining, min_remaining, max_remaining, division, directorate) {
+    constructor(col, grant_id, status, termination_date, project_title, abstract, org_name, estimated_remaining, min_remaining, max_remaining, division, directorate, div, dir) {
         this.col = col;
 
         this.id = grant_id;
@@ -13,12 +13,14 @@ class Circle {
         this.max_remaining = max_remaining;
         this.division = division;
         this.directorate = directorate;
+        this.div = div;
+        this.dir = dir;
 
         this.pos = createVector(random(legendRight + width*0.05, width*0.95), random(height*0.05, height*0.95));
         this.vel = createVector(0, 0);
         this.acc = createVector(0, 0);
 
-        this.r = map(this.estimated_remaining, min_remaining, max_remaining, 5, 60);
+        this.r = map(this.estimated_remaining, min_remaining, max_remaining, width*0.004, width*0.08);
         
         this.state = "default";
         this.original = createVector(this.pos.x, this.pos.y);
@@ -32,20 +34,6 @@ class Circle {
         let f = p5.Vector.sub(targ, this.pos);
         f.setMag(mag);
         this.applyForce(repel ? p5.Vector.mult(f, -1) : f);
-    }
-
-    applyForceCenter() {
-        let targ = createVector(width/2 + legendRight/2 + random(-40, 40), height/2 + random(-40, 40));
-        let f = p5.Vector.sub(targ, this.pos);
-        f.setMag(0.08);
-        this.applyForce(f);
-    }
-
-    applyRepulsiveForceCenter() {
-        let targ = createVector(width/2 + legendRight/2 + random(-40, 40), height/2 + random(-40, 40));
-        let f = p5.Vector.sub(this.pos, targ);
-        f.setMag(0.05);
-        this.applyForce(f);
     }
 
     update() {
@@ -69,7 +57,7 @@ class Circle {
     }
     
     hasKeyword(keyword) {
-        return this.abstract.toLowerCase().includes(keyword);
+        return this.abstract.toLowerCase().includes(keyword) || this.project_title.toLowerCase().includes(keyword);
     }
 
     checkHover() {

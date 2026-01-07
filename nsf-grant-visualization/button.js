@@ -3,7 +3,7 @@ class Button {
         this.label = label;
         this.keyword = keyword;
         this.pos = pos;
-        this.s = 12;
+        this.s = height*0.017;
         
         this.baseCol = baseCol;
         this.hoverCol = hoverCol;
@@ -21,14 +21,16 @@ class Button {
         } else {
             fill(this.baseCol);
         }
-
+        
+        textAlign(LEFT, BASELINE);
         noStroke();
         rectMode(CORNER);
-        rect(this.pos.x, this.pos.y, this.s, this.s);
+        rect(this.pos.x, this.pos.y, this.s, this.s, 2);
 
         fill(255);
-        textSize(15);
-        text(this.label, this.pos.x + this.s + 8, this.pos.y + this.s);
+        textStyle(NORMAL);
+        textSize(p_size);
+        text(this.label, this.pos.x + this.s + width*0.008, this.pos.y + this.s);
         
         stroke(0);
         strokeWeight(1);

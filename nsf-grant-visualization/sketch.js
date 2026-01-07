@@ -3,7 +3,13 @@ let circles = [];
 let buttons = [];
 let activeKeywords = [];
 let activeGrant;
+let tooltip;
+
 let legendRight;
+let p_size;
+let h_size;
+
+let keywordInput;
 
 let directorates = {
     "EDU": {label: "STEM Education", color: [80, 125, 225]},
@@ -22,9 +28,14 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(1000, 600);
+    createCanvas(1200, 600);
 
     legendRight = width*0.32;
+    p_size = height*0.021;
+    h_size = height*0.04;
+
+    keywordInput = createInput('');
+    keywordInput.attribute('placeholder', 'Enter custom keyword');
     
     const grantsArr = Object.values(grants);
     const estimated_remaining = grantsArr.map(g => g.estimated_remaining);
@@ -51,14 +62,22 @@ function setup() {
     }
 
     buttons = [
-        new Button("STEM", "stem", createVector(width*0.02, height*0.1), color(247, 210, 87), color(232, 193, 65), color(212, 172, 42)),
-        new Button("Gender", "gender", createVector(width*0.02, height*0.15), color(171, 135, 222), color(149, 107, 209), color(126, 80, 191)),
-        new Button("Girls", "girls", createVector(width*0.02, height*0.2), color(240, 104, 62), color(227, 88, 45), color(214, 72, 28)),
-        new Button("High school", "high school", createVector(width*0.02, height*0.25), color(63, 203, 235), color(41, 182, 214), color(28, 167, 199)),
-        new Button("Underrepresented", "underrepresented", createVector(width*0.02, height*0.3), color(235, 129, 235), color(219, 99, 219), color(199, 72, 199)),
-        new Button("Black", "black", createVector(width*0.02, height*0.35), color(201, 235, 91), color(186, 222, 69), color(172, 212, 44)),
-        new Button("Latino", "latino", createVector(width*0.02, height*0.4), color(102, 92, 247), color(82, 72, 232), color(62, 52, 217))
+        new Button("STEM", "stem", createVector(width*0.02, height*0.12), color(247, 210, 87), color(232, 193, 65), color(212, 172, 42)),
+        new Button("Gender", "gender", createVector(width*0.02, height*0.17), color(171, 135, 222), color(149, 107, 209), color(126, 80, 191)),
+        new Button("Girls", "girls", createVector(width*0.02, height*0.22), color(240, 104, 62), color(227, 88, 45), color(214, 72, 28)),
+        new Button("High school", "high school", createVector(width*0.02, height*0.27), color(63, 203, 235), color(41, 182, 214), color(28, 167, 199)),
+        new Button("High school", "high school", createVector(width*0.02, height*0.32), color(63, 203, 235), color(41, 182, 214), color(28, 167, 199)),
+        new Button("Underrepresented", "underrepresented", createVector(width*0.15, height*0.12), color(235, 129, 235), color(219, 99, 219), color(199, 72, 199)),
+        new Button("Black", "black", createVector(width*0.15, height*0.17), color(201, 235, 91), color(186, 222, 69), color(172, 212, 44)),
+        new Button("Hispanic", "hispanic", createVector(width*0.15, height*0.22), color(102, 92, 247), color(82, 72, 232), color(62, 52, 217)),
+        new Button("Native American", "native american", createVector(width*0.15, height*0.27), color(102, 92, 247), color(82, 72, 232), color(62, 52, 217))
     ];
+
+    tooltip = new Tooltip(legendRight - width*0.025, height*0.06);
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
@@ -76,7 +95,7 @@ function draw() {
         } else if (matches) {
             c.state = "active";
 
-            total += c.remaining;
+            total += c.estimated_remaining;
             count++;
             
             c.applyForceTarget(center, 0.08, false);
@@ -96,31 +115,79 @@ function draw() {
 }
 
 function drawLegend(total, count) {
-    textSize(15);
-    
-    rectMode(CORNER);
-    stroke(255);
+    for (let y = 0; y < height; y++) {
+        let c = lerpColor(color(32, 6, 51), color(0), y/height);
+        stroke(c);
+        line(0, y, legendRight, y);
+    }
+
+    stroke(176, 155, 191);
     strokeWeight(1);
-    fill(0);
-    rect(0, 0, legendRight, height);
-    line(0, height*0.45, legendRight, height*0.45);
-    line(0, height*0.56, legendRight, height*0.56);
+    line(legendRight, 0, legendRight, height);
+    line(0, height*0.42, legendRight, height*0.42);
+    line(0, height*0.53, legendRight, height*0.53);
+
+    textAlign(LEFT, CENTER);
+    textSize(h_size);
+    textStyle(BOLD);
+    noStroke();
+    text('NSF Grant Terminations', width*0.018, height*0.06);
+
+    keywordInput.position(width*0.15, height*0.315);
+    keywordInput.input(redoKeywords);
 
     for (let b of buttons) {
         b.display();
         b.update();
     }
     
+    textSize(p_size);
+    fill(176, 155, 191);
+    noStroke();
+    textAlign(LEFT, BASELINE);
+    textStyle(ITALIC);
+    text('Hover to view grant details. Click keywords to filter.', width*0.02, height*0.4);
+    
     noStroke();
     fill(255);
-    textAlign(LEFT);
-    textSize(15);
-    text(`Matched Grants: ${count}\nEstimated Funds Remaining: ${int(total)}`, width*0.02, height*0.5);
+    textAlign(LEFT, BASELINE);
+    textStyle(NORMAL);
+    text(`M                           ${count}`, width*0.02, height*0.46);
+    text(`E                                                 $${nfc(int(total))}`, width*0.02, height*0.5);
+    textStyle(BOLD);
+    fill(247, 211, 32);
+    text(`Matched Grants:`, width*0.02, height*0.46);
+    fill(247, 132, 32);
+    text(`Estimated Disrupted Funds:`, width*0.02, height*0.5);
 
     if (activeGrant != null) {
+        textStyle(NORMAL);
+        fill(255);
+        text(`P                     ${activeGrant.project_title}`, width*0.02, height*0.56, legendRight*0.9, height*0.1);
+        text(`O                      ${activeGrant.org_name}`, width*0.02, height*0.68, legendRight*0.9);
+        text(`D                             ${activeGrant.estimated_remaining == null ? 'N/A' : '$' + nfc(int(activeGrant.estimated_remaining))}`, width*0.02, height*0.74, legendRight*0.9);
+        text(`D              ${activeGrant.division}`, width*0.02, height*0.8, legendRight*0.9);
+        text(`D                   ${activeGrant.directorate}`, width*0.02, height*0.86, legendRight*0.9);
+        text(`T                              ${activeGrant.termination_date}`, width*0.02, height*0.92, legendRight*0.9);
 
-        text(`Project Title: ${activeGrant.project_title}`, width*0.02, height*0.59, legendRight*0.9, height*0.1);
-        text(`Organization: ${activeGrant.org_name}`, width*0.02, height*0.7, legendRight*0.9, height*0.08);
+        textStyle(BOLD);
+        fill(235, 129, 235);
+        text('Project Title: ', width*0.02, height*0.56, legendRight*0.9, height*0.1);
+        fill(63, 203, 235);
+        text(`Organization:`, width*0.02, height*0.68, legendRight*0.9, height*0.08);
+        fill(80, 125, 225);
+        text(`Disrupted Funds:`, width*0.02, height*0.74, legendRight*0.9);
+        fill(150, 185, 225);
+        text(`Division:`, width*0.02, height*0.8, legendRight*0.9);
+        fill(120, 65, 185);
+        text(`Directorate:`, width*0.02, height*0.86, legendRight*0.9);
+        fill(220, 80, 130);
+        text(`Termination Date:`, width*0.02, height*0.92, legendRight*0.9);
+    }
+
+    tooltip.displayButton();
+    if (tooltip.checkHover()) {
+        tooltip.displayTooltip();
     }
 }
 
@@ -143,13 +210,22 @@ function applyRepulsiveForce() {
 }
 
 function mousePressed() {
-    activeKeywords.length = 0;
     for (let b of buttons) {
         if (b.has(mouseX, mouseY)) {
             b.active = !b.active;
         }
+    }
+    redoKeywords();
+}
+
+function redoKeywords() {
+    activeKeywords.length = 0;
+    for (let b of buttons) {
         if (b.active) {
             activeKeywords.push(b.keyword);
         }
+    }
+    if (keywordInput.value() != '' && keywordInput.value() != 'Enter custom keyword') {
+        activeKeywords.push(keywordInput.value());
     }
 }
