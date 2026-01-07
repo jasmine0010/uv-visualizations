@@ -31,15 +31,15 @@ function setup() {
     
     circles = [];
 
-    circles.push(new Marker(745*s, 300*s, 'audio/EloiseG.mp3')) //Eloise G
+    circles.push(new Marker(825*s, 300*s, 'audio/EloiseG.mp3')) //Eloise G
     circles.push(new Marker(670*s, 480*s, 'audio/AddieS.mp3'))//Addison S
-    circles.push(new Marker(220*s, 270*s, 'audio/EllieL.mp3')) // Ellie L
-    circles.push(new Marker(140*s, 300*s, 'audio/CaraH.mp3')) // Cara H
-    circles.push(new Marker(575*s, 360*s, 'audio/ChloeS.mp3')) // chloe S
+    circles.push(new Marker(300*s, 270*s, 'audio/EllieL.mp3')) // Ellie L
+    circles.push(new Marker(220*s, 300*s, 'audio/CaraH.mp3')) // Cara H
+    circles.push(new Marker(715*s, 360*s, 'audio/ChloeS.mp3')) // chloe S
     circles.push(new Marker(1000*s, 700*s, 'audio/EleanorS.mp3'))// eleanor S (altadena)
-    circles.push(new Marker(420*s, 490*s, 'audio/EvieT.mp3'))
-    circles.push(new Marker(440*s, 290*s, 'audio/TessaHS.mp3'))
-    circles.push(new Marker(260*s, 320*s, 'audio/AlexN.mp3')) // 90
+    circles.push(new Marker(560*s, 490*s, 'audio/EvieT.mp3'))
+    circles.push(new Marker(600*s, 290*s, 'audio/TessaHS.mp3'))
+    circles.push(new Marker(340*s, 350*s, 'audio/AlexN.mp3')) // 90
 }
 
 
@@ -61,7 +61,7 @@ function draw() {
    
     fill(0, 0, 255);
     textSize(22);
-    text('Eloise', 715*s, 275*s);
+    text('Eloise', 795*s, 275*s);
     
     fill(0, 0, 255);
     textSize(22);
@@ -69,15 +69,15 @@ function draw() {
     
     fill(0, 0, 255);
     textSize(22);
-    text('Ellie', 197*s, 245*s);
+    text('Ellie', 277*s, 245*s);
    
     fill(0, 0, 255);
     textSize(22);
-    text('Cara', 115*s, 275*s);
+    text('Cara', 195*s, 275*s);
     
     fill(0, 0, 255);
     textSize(22);
-    text('Chloe', 545*s, 335*s);
+    text('Chloe', 685*s, 335*s);
     
     fill(0, 0, 255);
     textSize(22);
@@ -85,15 +85,15 @@ function draw() {
     
     fill(0, 0, 255);
     textSize(22);
-    text('Evie', 397*s, 465*s);
+    text('Evie', 537*s, 465*s);
     
     fill(0, 0, 255);
     textSize(22);
-    text('Tessa', 410*s, 265*s);
+    text('Tessa', 570*s, 265*s);
     
     fill(0, 0, 255);
     textSize(22);
-    text('Alex', 240*s, 295*s);
+    text('Alex', 320*s, 325*s);
    
 
    
