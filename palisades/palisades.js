@@ -19,22 +19,23 @@ function preload()
 
 function setup() {
     createCanvas(1200, 750);
-
-    img.resize(width, height);
+   
+    img.resize(900, height);
+    //img.resize(900, 750);
     
    
     
     circles = [];
 
-    circles.push(new Marker(995, 300, 'audio/EloiseG.mp3')) //Eloise G
-    circles.push(new Marker(660, 480, 'audio/AddieS.mp3'))//Addison S
-    circles.push(new Marker(290, 270, 'audio/EllieL.mp3')) // Ellie L
-    circles.push(new Marker(190, 300, 'audio/CaraH.mp3')) // Cara H
-    circles.push(new Marker(770, 360, 'audio/ChloeS.mp3')) // chloe S
-    circles.push(new Marker(1100, 700, 'audio/EleanorS.mp3'))// eleanor S (altadena)
-    circles.push(new Marker(550, 490, 'audio/EvieT.mp3'))
-    circles.push(new Marker(590, 290, 'audio/TessaHS.mp3'))
-    circles.push(new Marker(350, 320, 'audio/AlexN.mp3'))
+    circles.push(new Marker(745, 300, 'audio/EloiseG.mp3')) //Eloise G
+    circles.push(new Marker(500, 480, 'audio/AddieS.mp3'))//Addison S
+    circles.push(new Marker(220, 270, 'audio/EllieL.mp3')) // Ellie L
+    circles.push(new Marker(140, 300, 'audio/CaraH.mp3')) // Cara H
+    circles.push(new Marker(575, 360, 'audio/ChloeS.mp3')) // chloe S
+    circles.push(new Marker(800, 700, 'audio/EleanorS.mp3'))// eleanor S (altadena)
+    circles.push(new Marker(420, 490, 'audio/EvieT.mp3'))
+    circles.push(new Marker(440, 290, 'audio/TessaHS.mp3'))
+    circles.push(new Marker(260, 320, 'audio/AlexN.mp3')) // 90
 }
 
 
@@ -47,31 +48,43 @@ function draw() {
     
     fill(0);
     textSize(25);
-    text('Altadena', 1050, 630);
+    text('Altadena', 750, 630);
    
     fill(0, 0, 255);
     textSize(22);
-    text('Eloise', 965, 275);
+    text('Eloise', 715, 275);
     
     fill(0, 0, 255);
     textSize(22);
-    text('Addie', 632, 455);
+    text('Addie', 472, 455);
     
     fill(0, 0, 255);
     textSize(22);
-    text('Ellie', 267, 245);
+    text('Ellie', 197, 245);
    
     fill(0, 0, 255);
     textSize(22);
-    text('Cara', 165, 275);
+    text('Cara', 115, 275);
     
     fill(0, 0, 255);
     textSize(22);
-    text('Chloe', 740, 335);
+    text('Chloe', 545, 335);
     
     fill(0, 0, 255);
     textSize(22);
-    text('Eleanor', 1063, 675);
+    text('Eleanor', 760, 675);
+    
+    fill(0, 0, 255);
+    textSize(22);
+    text('Evie', 397, 465);
+    
+    fill(0, 0, 255);
+    textSize(22);
+    text('Tessa', 410, 265);
+    
+    fill(0, 0, 255);
+    textSize(22);
+    text('Alex', 240, 295);
    
 
    
@@ -92,6 +105,7 @@ function mouseClicked()
         {
         audio.hideControls();
         audio = null;
+        audio.stop();
         }
     
     for(let c of circles)
