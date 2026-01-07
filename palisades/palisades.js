@@ -106,10 +106,16 @@ function draw() {
         }
 
 
-    let about = "Coded by Annie '27 for Honors CS Projects taught by Dr. Darren Kessner"
+    let about1 = "Coded by Annie '27 for Honors CS Projects taught by Dr. Darren Kessner."
+    let about2 = "Interviews conducted by Ellie '29, Selvi '29, Kensi '29, and Mattea '29."
+    let about3 = "Audio edited by Mr. Erick Huezo."
+
     fill(0);
-    textSize(15);
-    text(about, 25, height-100, 200, 100);
+    textSize(13);
+    let y_about = height - 200;
+    text(about1, 25, y_about += 50, 300, 100);
+    text(about2, 25, y_about += 50, 300, 100);
+    text(about3, 25, y_about += 50, 300, 100);
 }
 
 
