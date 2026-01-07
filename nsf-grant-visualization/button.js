@@ -21,23 +21,25 @@ class Button {
         } else {
             fill(this.baseCol);
         }
-        
-        textAlign(LEFT, BASELINE);
+
         noStroke();
         rectMode(CORNER);
         rect(this.pos.x, this.pos.y, this.s, this.s, 2);
-
+        
+        textSize(p_size);
         fill(255);
         textStyle(NORMAL);
-        textSize(p_size);
+
+        if (this.active) {
+            textAlign(LEFT, TOP);
+            text('✓', this.pos.x, this.pos.y);
+        }
+
+        textAlign(LEFT, BASELINE);
         text(this.label, this.pos.x + this.s + width*0.008, this.pos.y + this.s);
         
         stroke(0);
         strokeWeight(1);
-        if (this.active) {
-            line(this.pos.x, this.pos.y, this.pos.x + this.s, this.pos.y + this.s);
-            line(this.pos.x + this.s, this.pos.y, this.pos.x, this.pos.y + this.s);
-        }
     }
 
     update() {

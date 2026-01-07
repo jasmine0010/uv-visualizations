@@ -64,13 +64,13 @@ function setup() {
     buttons = [
         new Button("STEM", "stem", createVector(width*0.02, height*0.12), color(247, 210, 87), color(232, 193, 65), color(212, 172, 42)),
         new Button("Gender", "gender", createVector(width*0.02, height*0.17), color(171, 135, 222), color(149, 107, 209), color(126, 80, 191)),
-        new Button("Girls", "girls", createVector(width*0.02, height*0.22), color(240, 104, 62), color(227, 88, 45), color(214, 72, 28)),
-        new Button("High school", "high school", createVector(width*0.02, height*0.27), color(63, 203, 235), color(41, 182, 214), color(28, 167, 199)),
-        new Button("High school", "high school", createVector(width*0.02, height*0.32), color(63, 203, 235), color(41, 182, 214), color(28, 167, 199)),
+        new Button("Women", "women", createVector(width*0.02, height*0.22), color(240, 104, 62), color(227, 88, 45), color(214, 72, 28)),
+        new Button("High school", "high school", createVector(width*0.02, height*0.27), color(80, 125, 225), color(53, 100, 204), color(27, 74, 179)),
+        new Button("Student", "student", createVector(width*0.02, height*0.32), color(220, 80, 130), color(207, 60, 112), color(186, 39, 91)),
         new Button("Underrepresented", "underrepresented", createVector(width*0.15, height*0.12), color(235, 129, 235), color(219, 99, 219), color(199, 72, 199)),
         new Button("Black", "black", createVector(width*0.15, height*0.17), color(201, 235, 91), color(186, 222, 69), color(172, 212, 44)),
         new Button("Hispanic", "hispanic", createVector(width*0.15, height*0.22), color(102, 92, 247), color(82, 72, 232), color(62, 52, 217)),
-        new Button("Native American", "native american", createVector(width*0.15, height*0.27), color(102, 92, 247), color(82, 72, 232), color(62, 52, 217))
+        new Button("Native American", "native american", createVector(width*0.15, height*0.27), color(63, 203, 235), color(41, 182, 214), color(28, 167, 199))
     ];
 
     tooltip = new Tooltip(legendRight - width*0.025, height*0.06);
@@ -127,6 +127,7 @@ function drawLegend(total, count) {
     line(0, height*0.42, legendRight, height*0.42);
     line(0, height*0.53, legendRight, height*0.53);
 
+    fill(120, 65, 185);
     textAlign(LEFT, CENTER);
     textSize(h_size);
     textStyle(BOLD);
