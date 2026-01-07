@@ -112,9 +112,10 @@ function mouseClicked()
 {
     if (audio)
         {
-        audio.hideControls();
-        audio = null;
         audio.stop();
+        audio.hideControls();
+        audio.remove();
+        audio = null
         }
     
     for(let c of circles)
