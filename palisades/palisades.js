@@ -104,6 +104,12 @@ function draw() {
         {
             c.display();
         }
+
+
+    let about = "Coded by Annie '27 for Honors CS Projects taught by Dr. Darren Kessner"
+    fill(0);
+    textSize(15);
+    text(about, 25, height-100, 200, 100);
 }
 
 
