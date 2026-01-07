@@ -115,11 +115,9 @@ function draw() {
 }
 
 function drawLegend(total, count) {
-    for (let y = 0; y < height; y++) {
-        let c = lerpColor(color(32, 6, 51), color(0), y/height);
-        stroke(c);
-        line(0, y, legendRight, y);
-    }
+    rectMode(CORNER);
+    fill(0);
+    rect(0, 0, legendRight, height);
 
     stroke(176, 155, 191);
     strokeWeight(1);
