@@ -31,7 +31,7 @@ class Button {
         rect(this.pos.x, this.pos.y, this.s, this.s, 2);
         
         textSize(p_size);
-        fill(0);
+        fill(255);
         textStyle(NORMAL);
 
         if (this.active) {
