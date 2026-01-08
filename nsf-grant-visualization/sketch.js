@@ -58,7 +58,9 @@ function setup() {
             min_remaining,
             max_remaining,
             g.division,
-            g.directorate
+            g.directorate,
+            g.div,
+            g.dir
         ))
     }
 
@@ -66,7 +68,7 @@ function setup() {
         new Button("STEM", "stem", createVector(width*0.02, height*0.12), color(247, 210, 87), color(232, 193, 65), color(212, 172, 42)),
         new Button("Gender", "gender", createVector(width*0.02, height*0.17), color(171, 135, 222), color(149, 107, 209), color(126, 80, 191)),
         new Button("Women", "women", createVector(width*0.02, height*0.22), color(240, 104, 62), color(227, 88, 45), color(214, 72, 28)),
-        new Button("High school", "high school", createVector(width*0.02, height*0.27), color(80, 125, 225), color(53, 100, 204), color(27, 74, 179)),
+        new Button("Girls", "girls", createVector(width*0.02, height*0.27), color(80, 125, 225), color(53, 100, 204), color(27, 74, 179)),
         new Button("Student", "student", createVector(width*0.02, height*0.32), color(220, 80, 130), color(207, 60, 112), color(186, 39, 91)),
         new Button("Underrepresented", "underrepresented", createVector(width*0.15, height*0.12), color(235, 129, 235), color(219, 99, 219), color(199, 72, 199)),
         new Button("Black", "black", createVector(width*0.15, height*0.17), color(201, 235, 91), color(186, 222, 69), color(172, 212, 44)),
@@ -89,7 +91,10 @@ function draw() {
     const hasActive = activeKeywords.length > 0;
     const center = createVector(width/2 + legendRight/2, height/2);
     for (let c of circles) {
-        let matches = activeKeywords.some(k => c.hasKeyword(k) === true);
+        let matches = true;
+        for (let k of activeKeywords) {
+            if (!c.hasKeyword(k)) matches = false;
+        }
         
         if (!hasActive) {
             c.state = "default";
@@ -175,9 +180,9 @@ function drawLegend(total, count) {
         text('Project Title: ', width*0.02, height*0.56, legendRight*0.9, height*0.1);
         fill(63, 203, 235);
         text(`Organization:`, width*0.02, height*0.68, legendRight*0.9, height*0.08);
-        fill(80, 125, 225);
-        text(`Disrupted Funds:`, width*0.02, height*0.74, legendRight*0.9);
         fill(150, 185, 225);
+        text(`Disrupted Funds:`, width*0.02, height*0.74, legendRight*0.9);
+        fill(80, 125, 225);
         text(`Division:`, width*0.02, height*0.8, legendRight*0.9);
         fill(120, 65, 185);
         text(`Directorate:`, width*0.02, height*0.86, legendRight*0.9);

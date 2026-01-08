@@ -22,7 +22,7 @@ class Circle {
 
         this.r = map(this.estimated_remaining, min_remaining, max_remaining, width*0.004, width*0.08);
         
-        this.state = "default";
+        this.state = 'default';
         this.original = createVector(this.pos.x, this.pos.y);
     }
 
@@ -48,11 +48,18 @@ class Circle {
         if (this.checkHover()) {
             activeGrant = this;
         }
+
+        if (this.state === 'active') {
+            this.col = [220, 155, 45];
+        } else {
+            this.col = directorates[this.dir] ? directorates[this.dir].color : [220, 220, 220];
+        }
     }
 
     display() {
-        noStroke();
-        fill(this.col[0], this.col[1], this.col[2], this.state !== "inactive" ? 255 : 100);
+        if (this.state === 'active') stroke(255);
+        else noStroke();
+        fill(this.col[0], this.col[1], this.col[2], this.state !== 'inactive' ? 255 : 100);
         ellipse(this.pos.x, this.pos.y, this.r*2, this.r*2);
     }
     

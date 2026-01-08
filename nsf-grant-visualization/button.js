@@ -4,10 +4,14 @@ class Button {
         this.keyword = keyword;
         this.pos = pos;
         this.s = height*0.017;
-        
+
         this.baseCol = color(255);
         this.hoverCol = color(235);
         this.activeCol = color(235);
+
+        this.baseCol = baseCol;
+        this.hoverCol = hoverCol;
+        this.activeCol = activeCol;
 
         this.hover = false;
         this.active = false;
