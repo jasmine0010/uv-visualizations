@@ -5,9 +5,9 @@ class Button {
         this.pos = pos;
         this.s = height*0.017;
         
-        this.baseCol = baseCol;
-        this.hoverCol = hoverCol;
-        this.activeCol = activeCol;
+        this.baseCol = color(255);
+        this.hoverCol = color(235);
+        this.activeCol = color(235);
 
         this.hover = false;
         this.active = false;
@@ -27,7 +27,7 @@ class Button {
         rect(this.pos.x, this.pos.y, this.s, this.s, 2);
         
         textSize(p_size);
-        fill(255);
+        fill(0);
         textStyle(NORMAL);
 
         if (this.active) {
@@ -35,6 +35,7 @@ class Button {
             text('✓', this.pos.x, this.pos.y);
         }
 
+        fill(255);
         textAlign(LEFT, BASELINE);
         text(this.label, this.pos.x + this.s + width*0.008, this.pos.y + this.s);
         

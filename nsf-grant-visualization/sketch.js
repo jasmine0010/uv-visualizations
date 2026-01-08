@@ -35,6 +35,7 @@ function setup() {
     h_size = height*0.04;
 
     keywordInput = createInput('');
+    keywordInput.size(width*0.13, height*0.027);
     keywordInput.attribute('placeholder', 'Enter custom keyword');
     
     const grantsArr = Object.values(grants);
@@ -125,7 +126,7 @@ function drawLegend(total, count) {
     line(0, height*0.42, legendRight, height*0.42);
     line(0, height*0.53, legendRight, height*0.53);
 
-    fill(120, 65, 185);
+    fill(136, 81, 204);
     textAlign(LEFT, CENTER);
     textSize(h_size);
     textStyle(BOLD);
