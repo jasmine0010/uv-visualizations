@@ -50,7 +50,7 @@ class Circle {
         }
 
         if (this.state === 'active') {
-            this.col = [220, 155, 45];
+            this.col = [230, 177, 71];
         } else {
             this.col = directorates[this.dir] ? directorates[this.dir].color : [220, 220, 220];
         }
@@ -64,6 +64,7 @@ class Circle {
     }
     
     hasKeyword(keyword) {
+        if (keyword === 'stem') return this.dir === 'EDU';
         return this.abstract.toLowerCase().includes(keyword) || this.project_title.toLowerCase().includes(keyword);
     }
 
