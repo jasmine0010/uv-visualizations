@@ -28,15 +28,15 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(800, 400);
+    createCanvas(900, 525);
 
     legendRight = width*0.32;
     p_size = height*0.021;
-    h_size = height*0.04;
+    h_size = height*0.035;
 
     keywordInput = createInput('');
     keywordInput.size(width*0.13, height*0.027);
-    keywordInput.attribute('placeholder', 'Enter custom keyword');
+    keywordInput.attribute('placeholder', 'Custom keyword');
     
     const grantsArr = Object.values(grants);
     const estimated_remaining = grantsArr.map(g => g.estimated_remaining);
