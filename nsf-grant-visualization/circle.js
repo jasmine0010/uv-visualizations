@@ -65,7 +65,7 @@ class Circle {
     
     hasKeyword(keyword) {
         if (keyword === 'stem') return this.dir === 'EDU';
-        return this.abstract.toLowerCase().includes(keyword) || this.project_title.toLowerCase().includes(keyword);
+        return this.project_title.toLowerCase().includes(keyword);
     }
 
     checkHover() {
