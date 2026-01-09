@@ -2,19 +2,15 @@ class Tooltip {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.r = height*0.025;
+        this.r = height*0.05;
     }
 
     displayButton() {
-        stroke(176, 155, 191);
-        strokeWeight(1);
-        noFill();
-        ellipse(this.x, this.y, this.r, this.r);
         noStroke();
         fill(176, 155, 191);
         textStyle(NORMAL);
         textAlign(CENTER, CENTER);
-        text('i', this.x, this.y);
+        text('Credits', this.x, this.y);
     }
 
     displayTooltip() {

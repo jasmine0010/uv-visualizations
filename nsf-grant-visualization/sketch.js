@@ -76,7 +76,7 @@ function setup() {
         new Button("Native American", "native american", createVector(width*0.15, height*0.27), color(63, 203, 235), color(41, 182, 214), color(28, 167, 199))
     ];
 
-    tooltip = new Tooltip(legendRight - width*0.025, height*0.06);
+    tooltip = new Tooltip(legendRight - width*0.038, height*0.06);
 }
 
 function windowResized() {
