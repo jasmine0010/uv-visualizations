@@ -28,7 +28,7 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(1200, 600);
+    createCanvas(800, 400);
 
     legendRight = width*0.32;
     p_size = height*0.021;
